@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h3>Login</h3>
+  <form method="post" class="mt-3">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <div class="mb-3">
+      <label class="form-label">Username</label>
+      {{ form.username }}
+      {% for e in form.username.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Password</label>
+      {{ form.password }}
+      {% for e in form.password.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
+    </div>
+    <button class="btn btn-primary" type="submit">Login</button>
+    <a class="btn btn-link" href="{% url 'password_reset' %}">Forgot password?</a>
+  </form>
+{% endblock %}
