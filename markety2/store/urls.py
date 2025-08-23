@@ -1,5 +1,12 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
+from .views import CategoryViewSet, ProductViewSet
+from rest_framework.routers import DefaultRouter
+
+router = DefaultRouter()
+router.register(r"categories", CategoryViewSet, basename="category")
+router.register(r"products", ProductViewSet, basename="product")
+
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -13,4 +20,5 @@ urlpatterns = [
 
     path('checkout/', views.checkout, name='checkout'),
     path('order/success/<int:order_id>/', views.order_success, name='order_success'),
+    path("api/", include(router.urls)),
 ]

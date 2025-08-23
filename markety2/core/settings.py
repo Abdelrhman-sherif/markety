@@ -3,6 +3,9 @@ import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
+
 SECRET_KEY = 'django-insecure-change-me'
 DEBUG = True
 ALLOWED_HOSTS = []
@@ -16,7 +19,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'store',
     'accounts',
+    'rest_framework',
 ]
+
+REST_FRAMEWORK = {
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 10,
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -66,6 +75,9 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Use CustomUser model for authentication
+AUTH_USER_MODEL = 'accounts.CustomUser'
 
 # Auth redirects
 LOGIN_REDIRECT_URL = 'home'

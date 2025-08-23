@@ -3,6 +3,9 @@
   <h3>Create an account</h3>
   <form method="post" class="mt-3" novalidate>
     {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Register</button>
+    {% csrf_token %}
     {{ form.non_field_errors }}
     <div class="mb-3">
       <label class="form-label">Username</label>

@@ -3,6 +3,8 @@ from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Category, Product, Order, OrderItem
+from rest_framework import viewsets, permissions
+
 
 CART_SESSION_KEY = 'cart'
 
@@ -123,3 +125,19 @@ def checkout(request):
 def order_success(request, order_id):
     order = get_object_or_404(Order, id=order_id)
     return render(request, 'store/order_success.html', {'order': order})
+# --- API imports ---
+from rest_framework import viewsets, permissions
+from .models import Category, Product
+from .serializers import CategorySerializer, ProductSerializer
+
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all().order_by("id")
+    serializer_class = CategorySerializer
+    permission_classes = [permissions.AllowAny]
+    http_method_names = ["get", "head", "options"]
+
+class ProductViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all().order_by("id")
+    serializer_class = ProductSerializer
+    permission_classes = [permissions.AllowAny]
+    http_method_names = ["get", "head", "options"]   # only GET allowed
