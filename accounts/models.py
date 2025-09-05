@@ -18,6 +18,7 @@ class CustomUserManager(BaseUserManager):
         return self.create_user(email, username, password, **extra_fields)
 
 class CustomUser(AbstractUser):
+    role = models.CharField(max_length=10, choices=(('admin', 'Admin'), ('customer', 'Customer')), default='customer')
     id = models.AutoField(primary_key=True, editable=False)
     email = models.EmailField(unique=True)
     username = models.CharField(max_length=100, unique=True)
@@ -36,3 +37,4 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.email
+
