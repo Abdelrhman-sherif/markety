@@ -1,8 +1,0 @@
-{% extends 'base.html' %}
-{% block content %}
-  <div class="text-center py-5">
-    <h2>🎉 Thank you! Your order has been placed.</h2>
-    <p>Order ID: <strong>#{{ order.id }}</strong></p>
-    <a href="{% url 'home' %}" class="btn btn-primary">Continue Shopping</a>
-  </div>
-{% endblock %}
